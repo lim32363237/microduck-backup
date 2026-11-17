@@ -1,0 +1,26 @@
+<mujoco model="microduck_maze">
+    <compiler angle="radian" autolimits="true"/>
+    <worldbody>
+    <geom name="wall_0" type="box" size="0.0100 0.3700 0.0750" pos="0.3500 0.0000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_1" type="box" size="0.0100 0.3700 0.0750" pos="-0.3500 -0.7000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_2" type="box" size="0.0100 0.3700 0.0750" pos="-0.3500 0.7000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_3" type="box" size="0.0100 0.3700 0.0750" pos="1.0500 -0.7000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_4" type="box" size="0.0100 0.3700 0.0750" pos="-1.0500 -1.4000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_5" type="box" size="0.3700 0.0100 0.0750" pos="1.4000 -0.3500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_6" type="box" size="0.3700 0.0100 0.0750" pos="0.7000 -1.0500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_7" type="box" size="0.0100 0.3700 0.0750" pos="-1.0500 0.7000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_8" type="box" size="0.3700 0.0100 0.0750" pos="0.0000 -1.0500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_9" type="box" size="0.0100 0.3700 0.0750" pos="-1.0500 -0.7000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_10" type="box" size="0.0100 0.3700 0.0750" pos="-1.0500 0.0000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_11" type="box" size="0.3700 0.0100 0.0750" pos="0.7000 0.3500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_12" type="box" size="0.3700 0.0100 0.0750" pos="-0.7000 1.0500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_13" type="box" size="0.3700 0.0100 0.0750" pos="0.0000 0.3500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="wall_14" type="box" size="0.0100 0.3700 0.0750" pos="1.0500 0.7000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="border_bN" type="box" size="0.0100 1.7700 0.0750" pos="1.7500 0.0000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="border_bS" type="box" size="0.0100 1.7700 0.0750" pos="-1.7500 0.0000 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="border_bE" type="box" size="1.7700 0.0100 0.0750" pos="0.0000 1.7500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <geom name="border_bW" type="box" size="1.7700 0.0100 0.0750" pos="0.0000 -1.7500 0.0750" rgba="0.45 0.45 0.5 1"/>
+    <site name="mark_S_0_0" type="cylinder" size="0.060 0.001" pos="-1.4000 -1.4000 0.001" rgba="0.2 0.8 0.2 0.8"/>
+    <site name="mark_G_4_4" type="cylinder" size="0.080 0.001" pos="1.4000 1.4000 0.001" rgba="0.9 0.2 0.2 0.85"/>
+    </worldbody>
+</mujoco>

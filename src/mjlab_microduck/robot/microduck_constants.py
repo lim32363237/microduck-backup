@@ -157,7 +157,11 @@ FULL_COLLISION = CollisionCfg(
 # Exclude passive_* joints (jaw linkage in the new model has no XML actuator).
 # Voltage domain randomization (mirrors mjlab_microban):
 #   - vin_range: per-env battery voltage sampled at startup (replaces fixed vin)
-#   - vin_drop_gain_range: load-dependent voltage sag V_drop = gain * sum(|tau|)
+#   - vin_drop_resistance_range: load-dependent voltage sag V_drop = R * I,
+#     I = sum(|tau|) / kt. Migrated from the old gain model (V_drop = gain*sum|tau|):
+#     the vendored bam (mjlab_frictionloss, newer than the pinned 62bd8ce) replaced
+#     vin_drop_gain_range with the physically-correct resistance model. Equivalent
+#     range: R = gain * kt, kt(xl330 m6)=0.366 → gain (0,0.2) ≈ R (0, 0.073) Ohm.
 #   - vin_min: hard floor on the effective voltage after sag
 # kp_fw kept at 200 (microduck's preserved firmware stiffness; microban uses 125).
 _BAM_ACTUATOR_KWARGS = dict(
@@ -167,7 +171,7 @@ _BAM_ACTUATOR_KWARGS = dict(
     kp_fw=200.0,  # microduck's preserved firmware stiffness (microban uses 125)
     # vin_range=(6.9, 7.9),
     vin_range=(6.5, 8.2),
-    vin_drop_gain_range=(0.0, 0.2),
+    vin_drop_resistance_range=(0.0, 0.073),  # ≈ old gain (0.0, 0.2) * kt 0.366
     vin_min=6.0,
     # max_current=1.75,
     delay_min_lag=3,

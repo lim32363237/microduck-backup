@@ -145,6 +145,37 @@ try:
 except Exception as _e:  # pragma: no cover
     print(f"[mdp] Patch 5 NOT applied ({_e!r})")
 
+# ---------------------------------------------------------------------------
+# Patch 6: wandb.Settings compatibility. rsl_rl 5.0.1's WandbSummaryWriter calls
+# wandb.Settings(start_method="thread"), a kwarg REMOVED in wandb >= ~0.19
+# (pydantic Settings now rejects extras -> "extra_forbidden" ValidationError,
+# crashing training at logger init). mjlab pins wandb>=0.22.3 so we cannot
+# downgrade. Wrap wandb.Settings to drop kwargs the installed version no longer
+# accepts, instead of editing site-packages (which `uv sync` / HF Jobs would
+# revert). Harmless on older wandb that still accepts the kwarg.
+# ---------------------------------------------------------------------------
+try:
+    import wandb as _wandb
+
+    _OrigSettings = _wandb.Settings
+
+    def _compat_settings(*args, **kwargs):
+        try:
+            return _OrigSettings(*args, **kwargs)
+        except Exception:
+            # Retry without kwargs the installed wandb rejects (e.g. start_method).
+            for _bad in ("start_method",):
+                kwargs.pop(_bad, None)
+            try:
+                return _OrigSettings(*args, **kwargs)
+            except Exception:
+                return _OrigSettings()
+
+    _wandb.Settings = _compat_settings
+    print("[mdp] Patch 6 active: wandb.Settings drops removed kwargs (start_method)")
+except Exception as _e:  # pragma: no cover
+    print(f"[mdp] Patch 6 NOT applied ({_e!r})")
+
 if TYPE_CHECKING:
     from mjlab.viewer.debug_visualizer import DebugVisualizer
 
